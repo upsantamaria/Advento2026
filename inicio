@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="charter">
+  <title>«Abre o coração à Palavra» — Campanha de Advento 2026 | Unidade Pastoral Santa Maria de Penacova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Charter) */
+      --background: #f7f4ec;
+      --surface-container-low: #fffdf8;
+      --surface-container: #ece5d4;
+      --surface-container-high: #e3dac4;
+
+      /* Ink */
+      --on-surface: #1c1f26;
+      --on-surface-variant: #4f5360;
+
+      /* Rules */
+      --outline: #b08d57;
+      --outline-variant: #d9cfb8;
+
+      /* Accents */
+      --primary: #14213d;
+      --on-primary: #f7f4ec;
+      --primary-container: #e3e6ee;
+      --on-primary-container: #14213d;
+      --secondary: #2d5a4a;
+      --secondary-container: #e2ede8;
+      --tertiary: #8a6a35;
+      --error: #9b2c2c;
+      --on-error: #f7f4ec;
+
+      /* Data series */
+      --data-1: #14213d;
+      --data-2: #8a6a35;
+      --data-3: #2d5a4a;
+      --data-4: #5b7aa0;
+      --data-context: #c2bba9;
+
+      /* Fonts */
+      --font-headline: 'Libre Caslon Text', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-label: 'Inter', sans-serif;
+
+      /* Shape (2px Charter discipline) */
+      --rounded: 0.125rem;
+      --rounded-lg: 0.125rem;
+      --rounded-full: 0.125rem;
+
+      /* Style effects */
+      --brass-rule: 2px solid var(--outline);
+      --brass-band-border: 3px solid var(--outline);
+      --hairline: 1px solid var(--outline-variant);
+      --leaf-underline: 0 1px 0 var(--outline-variant);
+      --navy-brass-text: color-mix(in srgb, var(--outline) 78%, var(--on-primary));
+      --navy-lede-text: color-mix(in srgb, var(--on-primary) 82%, var(--primary));
+      --navy-subtle-border: color-mix(in srgb, var(--outline) 45%, var(--primary));
+      --navy-subtle-fill: color-mix(in srgb, var(--on-primary) 8%, var(--primary));
+
+      /* Semantic tokens */
+      --positive: #2d5a4a;
+      --warning: #8a6a35;
+      --focus: #14213d;
+
+      /* Type scale (Dashboard / Explorer) */
+      --display-size: clamp(1.85rem, 1.4rem + 1.5vw, 2.65rem);
+      --headline-size: clamp(1.375rem, 1.15rem + 0.75vw, 1.85rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; margin: 0; padding: 0; }
+    header { position: static !important; }
+
+    body {
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .title-band :focus-visible {
+      outline: 2px solid var(--on-primary);
+      outline-offset: 2px;
+    }
+
+    /* Full-bleed Navy Title Band (Charter Treatment 1) */
+    .title-band {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-bottom: var(--brass-band-border);
+      padding-block: var(--space-xl);
+      padding-inline: var(--space-lg);
+    }
+
+    .title-band-inner {
+      max-width: 1200px;
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-lg) var(--space-xl);
+      align-items: center;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      padding-bottom: var(--space-md);
+      margin-bottom: var(--space-md);
+      border-bottom: 1px solid var(--navy-subtle-border);
+    }
+
+    .pastoral-crest {
+      width: 112px;
+      height: auto;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pastoral-logo-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      mix-blend-mode: screen;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .brand-kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--navy-brass-text);
+    }
+
+    .brand-name {
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 400;
+      color: var(--on-primary);
+      line-height: 1.25;
+    }
+
+    .campaign-kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--navy-brass-text);
+      margin: 0 0 var(--space-xs);
+    }
+
+    .title-band h1 {
+      font-family: var(--font-headline);
+      font-weight: 400;
+      font-size: var(--display-size);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--on-primary);
+      margin: 0 0 var(--space-sm);
+    }
+
+    .title-band .lede {
+      color: var(--navy-lede-text);
+      max-width: 65ch;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .header-summary {
+      background-color: var(--navy-subtle-fill);
+      border: 1px solid var(--navy-subtle-border);
+      border-top: var(--brass-rule);
+      border-radius: var(--rounded);
+      padding: var(--space-md) var(--space-lg);
+      min-width: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .header-stat-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--navy-brass-text);
+    }
+
+    .header-stat-value {
+      font-family: var(--font-headline);
+      font-weight: 400;
+      font-size: var(--headline-size);
+      font-variant-numeric: tabular-nums lining-nums;
+      color: var(--on-primary);
+      line-height: 1.1;
+    }
+
+    .header-stat-note {
+      font-size: 0.875rem;
+      color: var(--navy-lede-text);
+    }
+
+    /* Main Container */
+    .page-grid {
+      display: grid;
+      gap: var(--space-xl);
+      padding: var(--space-lg);
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Section Head (Charter Treatment 5) */
+    .section-head {
+      border-top: var(--brass-rule);
+      padding-top: var(--space-md);
+      border-bottom: var(--hairline);
+      padding-bottom: var(--space-sm);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-md);
+    }
+
+    .section-head-titles {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .label-kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--tertiary);
+    }
+
+    .section-head h2, .section-title {
+      font-family: var(--font-headline);
+      font-weight: 400;
+      font-size: var(--headline-size);
+      line-height: 1.18;
+      margin: 0;
+      color: var(--on-surface);
+    }
+
+    /* Navigation Strip */
+    .nav-controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .season-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .step-arrows {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border: 1px solid var(--primary);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background-color: color-mix(in srgb, var(--primary) 88%, var(--on-surface));
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background-color: var(--primary-container);
+    }
+
+    .btn-subtle {
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      border: 1px solid var(--outline-variant);
+    }
+    .btn-subtle:hover:not(:disabled) {
+      background-color: var(--surface-container);
+    }
+
+    .btn.is-active {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-positive-active {
+      background-color: var(--secondary);
+      color: var(--on-primary);
+      border: 1px solid var(--secondary);
+    }
+    .btn-positive-active:hover:not(:disabled) {
+      background-color: color-mix(in srgb, var(--secondary) 88%, var(--on-surface));
+    }
+
+    /* 8-Celebration Selector Grid */
+    .celebration-grid-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(132px, 100%), 1fr));
+      gap: var(--space-sm);
+    }
+
+    .celebration-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-xs);
+      min-height: 76px;
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-top: 2px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      text-align: left;
+      cursor: pointer;
+      color: var(--on-surface);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .celebration-tab:hover {
+      background-color: var(--surface-container);
+      border-top-color: var(--outline);
+    }
+
+    .celebration-tab[aria-selected="true"] {
+      background-color: var(--primary-container);
+      border-color: var(--primary);
+      border-top: 3px solid var(--outline);
+      box-shadow: var(--leaf-underline);
+    }
+
+    .celebration-tab.is-hidden {
+      display: none;
+    }
+
+    .tab-meta-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-xs);
+    }
+
+    .tab-num {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums lining-nums;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tertiary);
+    }
+
+    .celebration-tab[aria-selected="true"] .tab-num {
+      color: var(--primary);
+    }
+
+    .tab-done-mark {
+      color: var(--secondary);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .tab-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      line-height: 1.2;
+      color: var(--on-surface);
+    }
+
+    .tab-guide {
+      font-size: 0.75rem;
+      color: var(--on-surface-variant);
+      line-height: 1.3;
+    }
+
+    /* Active Celebration Detail Workspace */
+    .celebration-hero-card {
+      background-color: var(--surface-container-low);
+      border-top: var(--brass-rule);
+      box-shadow: var(--leaf-underline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg) var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .celebration-badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .stamp-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--tertiary);
+      background-color: transparent;
+    }
+
+    .stamp-tag-green {
+      border-color: var(--secondary);
+      color: var(--secondary);
+      background-color: var(--secondary-container);
+    }
+
+    .celebration-heading {
+      font-family: var(--font-headline);
+      font-weight: 400;
+      font-size: clamp(1.625rem, 1.3rem + 1.1vw, 2.25rem);
+      line-height: 1.12;
+      margin: 0;
+      color: var(--on-surface);
+    }
+
+    .celebration-subtitle {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--subhead-size);
+      color: var(--primary);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .celebration-intro-box {
+      border-left: 3px solid var(--outline);
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--background);
+      max-width: 70ch;
+    }
+
+    .celebration-intro-label {
+      display: block;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--tertiary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .celebration-intro-text {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-style: italic;
+      font-size: 1.0625rem;
+      line-height: 1.55;
+      color: var(--on-surface);
+    }
+
+    /* Two-column asymmetric workspace (Charter house layout) */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .column-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    /* Figure Cards (Charter Treatment 3 & 4) */
+    .figure-card {
+      background-color: var(--surface-container-low);
+      border-top: var(--brass-rule);
+      box-shadow: var(--leaf-underline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .card-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      border-bottom: var(--hairline);
+      padding-bottom: var(--space-sm);
+    }
+
+    .card-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--on-surface-variant);
+    }
+
+    .figure-value {
+      font-family: var(--font-headline);
+      font-weight: 400;
+      font-size: clamp(1.375rem, 1.15rem + 0.65vw, 1.75rem);
+      font-variant-numeric: tabular-nums lining-nums;
+      color: var(--primary);
+      line-height: 1.25;
+      margin: var(--space-xs) 0 0;
+    }
+
+    .figure-delta {
+      color: var(--tertiary);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .card-body-text {
+      margin: 0;
+      color: var(--on-surface);
+      max-width: 65ch;
+      line-height: 1.65;
+    }
+
+    .gesture-action-bar {
+      margin-top: var(--space-sm);
+      padding-top: var(--space-md);
+      border-top: var(--hairline);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .status-note {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+
+    .status-note.is-positive {
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    /* Prayer & Sign Panel */
+    .prayer-text {
+      font-family: var(--font-headline);
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: var(--on-surface);
+      margin: 0;
+      max-width: 62ch;
+    }
+
+    .sign-callout {
+      background-color: var(--background);
+      border: var(--hairline);
+      border-left: 2px solid var(--secondary);
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .sign-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--secondary);
+      margin: 0;
+    }
+
+    .prayer-empty-note {
+      background-color: var(--background);
+      border: var(--hairline);
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      color: var(--on-surface-variant);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    /* Form Controls (always-visible label above input) */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+
+    .text-input, .textarea-input {
+      width: 100%;
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      color: var(--on-surface);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      transition: border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .text-input:focus, .textarea-input:focus {
+      border-color: var(--primary);
+      outline: 2px solid var(--focus);
+      outline-offset: 1px;
+    }
+
+    .textarea-input {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .controls-row-aligned {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .search-box-wrap {
+      flex: 1 1 260px;
+      max-width: 380px;
+    }
+
+    .inline-feedback {
+      font-size: 0.875rem;
+      color: var(--secondary);
+      font-weight: 500;
+      min-height: 1.25rem;
+    }
+
+    /* Overview Table (Charter native habitat) */
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      background-color: var(--surface-container-low);
+      border-top: var(--brass-rule);
+      box-shadow: var(--leaf-underline);
+      border-radius: var(--rounded);
+    }
+
+    .campaign-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9375rem;
+    }
+
+    .campaign-table thead th {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: var(--brass-rule);
+      white-space: nowrap;
+    }
+
+    .campaign-table tbody td {
+      padding: var(--space-md);
+      border-bottom: var(--hairline);
+      vertical-align: top;
+      color: var(--on-surface);
+    }
+
+    .campaign-table tbody tr {
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .campaign-table tbody tr:hover {
+      background-color: var(--surface-container);
+    }
+
+    .campaign-table tbody tr.is-selected {
+      background-color: var(--primary-container);
+    }
+
+    .col-num {
+      font-variant-numeric: tabular-nums lining-nums;
+      font-weight: 600;
+      color: var(--tertiary);
+      white-space: nowrap;
+    }
+
+    .table-title-cell {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .table-scripture-cell {
+      font-variant-numeric: tabular-nums lining-nums;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .page-footer {
+      border-top: var(--hairline);
+      padding-top: var(--space-lg);
+      padding-bottom: var(--space-xl);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      color: var(--on-surface-variant);
+      font-size: 0.875rem;
+    }
+
+    .footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    /* Smooth reveal on selection */
+    .fade-swap {
+      animation: fadeInUp var(--dur-short) var(--ease-out);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive rules */
+    @media (max-width: 900px) {
+      .title-band-inner {
+        grid-template-columns: 1fr;
+      }
+      .workspace-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .title-band {
+        padding: var(--space-lg) var(--space-md);
+      }
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-lg);
+      }
+      .celebration-hero-card {
+        padding: var(--space-md);
+      }
+      .figure-card {
+        padding: var(--space-md);
+      }
+      .brand-lockup {
+        align-items: center;
+        gap: var(--space-md);
+      }
+      .pastoral-crest {
+        width: 88px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="title-band">
+    <div class="title-band-inner">
+      <div>
+        <div class="brand-lockup">
+          <div class="pastoral-crest">
+            <img src="Logo_Sta_Maria_PCV_FINAL_Branco.jpg" alt="Logótipo da Unidade Pastoral Santa Maria do Concelho de Penacova" class="pastoral-logo-img">
+          </div>
+          <div class="brand-text">
+            <span class="brand-kicker">Unidade Pastoral</span>
+            <span class="brand-name">Santa Maria do Concelho de Penacova</span>
+          </div>
+        </div>
+
+        <p class="campaign-kicker">Campanha Pastoral · Do Advento ao Baptismo do Senhor · 2026/2027</p>
+        <h1>«Abre o coração à Palavra» — Campanha de Advento 2026</h1>
+        <p class="lede">
+          Itinerário litúrgico e familiar em oito celebrações, da vigilância do I Domingo do Advento ao compromisso do Baptismo do Senhor.
+        </p>
+      </div>
+
+      <aside class="header-summary" aria-label="Resumo do acompanhamento semanal">
+        <span class="header-stat-label">Progresso da Campanha</span>
+        <span class="header-stat-value" id="header-progress-count">0 / 8</span>
+        <span class="header-stat-note" id="header-progress-note">Gestos semanais vividos</span>
+      </aside>
+    </div>
+  </header>
+
+  <main class="page-grid">
+
+    <!-- Secção de Navegação Interativa -->
+    <section aria-labelledby="nav-section-heading">
+      <div class="section-head">
+        <div class="section-head-titles">
+          <span class="label-kicker">Itinerário Litúrgico · 8 Celebrações</span>
+          <h2 id="nav-section-heading">Domingos e Celebrações da Campanha</h2>
+        </div>
+        <div class="step-arrows">
+          <button type="button" class="btn btn-subtle" id="btn-prev-celebration" onclick="stepCelebration(-1)">
+            <i data-lucide="arrow-left" aria-hidden="true"></i>
+            <span>Anterior</span>
+          </button>
+          <button type="button" class="btn btn-subtle" id="btn-next-celebration" onclick="stepCelebration(1)">
+            <span>Seguinte</span>
+            <i data-lucide="arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="nav-controls-row" style="margin-top: var(--space-md);">
+        <div class="season-filters" role="group" aria-label="Filtrar por tempo litúrgico">
+          <button type="button" class="btn btn-secondary is-active" id="filter-all" onclick="setSeasonFilter('all')">
+            Todas (8)
+          </button>
+          <button type="button" class="btn btn-secondary" id="filter-advento" onclick="setSeasonFilter('Advento')">
+            Tempo do Advento (4)
+          </button>
+          <button type="button" class="btn btn-secondary" id="filter-natal" onclick="setSeasonFilter('Natal')">
+            Tempo do Natal (4)
+          </button>
+        </div>
+        <span class="status-note" id="active-position-indicator">Celebração 1 de 8</span>
+      </div>
+
+      <div class="celebration-grid-nav" role="tablist" aria-label="Selecionar domingo ou celebração" id="celebration-tabs">
+        <!-- Preenchido dinamicamente -->
+      </div>
+    </section>
+
+    <!-- Detalhe da Celebração em Causa -->
+    <section aria-labelledby="detail-celebration-title" id="detail-section">
+      <article class="celebration-hero-card fade-swap" id="celebration-hero">
+        <div class="celebration-badges-row">
+          <div class="badge-group">
+            <span class="stamp-tag" id="detail-season-tag">Tempo do Advento</span>
+            <span class="stamp-tag stamp-tag-green" id="detail-done-tag" hidden>Gesto vivido</span>
+          </div>
+          <span class="label-kicker" id="detail-order-label">Celebração 01 / 08</span>
+        </div>
+
+        <h2 class="celebration-heading" id="detail-celebration-title">I Domingo do Advento</h2>
+        <p class="celebration-subtitle" id="detail-celebration-subtitle">Abre o coração à Palavra com o profeta Isaías</p>
+
+        <div class="celebration-intro-box">
+          <span class="celebration-intro-label" id="detail-intro-label">Introdução à celebração</span>
+          <p class="celebration-intro-text" id="detail-intro-text"></p>
+        </div>
+      </article>
+
+      <div class="workspace-grid" style="margin-top: var(--space-lg);">
+        <!-- Coluna Esquerda: Texto Bíblico, Atitude e Gesto -->
+        <div class="column-stack">
+          <section class="figure-card" aria-labelledby="card-scripture-label">
+            <div class="card-header-row">
+              <span class="card-kicker" id="card-scripture-label">
+                <i data-lucide="book-open" aria-hidden="true"></i>
+                Texto Bíblico a Meditar
+              </span>
+              <button type="button" class="btn btn-subtle" id="btn-copy-scripture" onclick="copyTextField('scripture')">
+                <i data-lucide="copy" aria-hidden="true"></i>
+                <span>Copiar referência</span>
+              </button>
+            </div>
+            <p class="figure-value" id="detail-scripture"></p>
+            <p class="figure-delta" id="detail-season-subline"></p>
+          </section>
+
+          <section class="figure-card" aria-labelledby="card-attitude-label">
+            <div class="card-header-row">
+              <span class="card-kicker" id="card-attitude-label">
+                <i data-lucide="compass" aria-hidden="true"></i>
+                Atitude a Melhorar
+              </span>
+            </div>
+            <p class="figure-value" id="detail-attitude-title"></p>
+            <p class="card-body-text" id="detail-attitude-desc"></p>
+          </section>
+
+          <section class="figure-card" aria-labelledby="card-gesture-label">
+            <div class="card-header-row">
+              <span class="card-kicker" id="card-gesture-label">
+                <i data-lucide="hand-heart" aria-hidden="true"></i>
+                Gesto da Semana
+              </span>
+            </div>
+            <p class="card-body-text" id="detail-gesture-text"></p>
+
+            <div class="gesture-action-bar">
+              <button type="button" class="btn btn-primary" id="btn-toggle-gesture" onclick="toggleGestureDone()">
+                <i data-lucide="check-circle" aria-hidden="true"></i>
+                <span id="btn-toggle-gesture-text">Marcar gesto como vivido</span>
+              </button>
+              <span class="status-note" id="gesture-status-note">Por viver esta semana</span>
+            </div>
+          </section>
+        </div>
+
+        <!-- Coluna Direita: Sinal, Oração e Propósito Pessoal/Familiar -->
+        <div class="column-stack">
+          <section class="figure-card" aria-labelledby="card-prayer-label">
+            <div class="card-header-row">
+              <span class="card-kicker" id="card-prayer-label">
+                <i data-lucide="flame" aria-hidden="true"></i>
+                Sinal e Oração Correspondente
+              </span>
+              <button type="button" class="btn btn-subtle" id="btn-copy-prayer" onclick="copyTextField('prayer')">
+                <i data-lucide="copy" aria-hidden="true"></i>
+                <span>Copiar oração</span>
+              </button>
+            </div>
+
+            <div id="detail-sign-container" class="sign-callout" hidden>
+              <span class="label-kicker" id="detail-sign-kicker">Sinal e oração</span>
+              <h3 class="sign-title" id="detail-sign-title"></h3>
+              <p class="card-body-text" id="detail-sign-desc"></p>
+            </div>
+
+            <div id="detail-prayer-container">
+              <p class="prayer-text" id="detail-prayer-text"></p>
+            </div>
+
+            <div id="detail-prayer-empty" class="prayer-empty-note" hidden>
+              Neste excerto da campanha, a celebração apresenta a <strong>Introdução à celebração</strong> para o acolhimento comunitário e familiar, não incluindo um texto de oração próprio adicional. Utilize a introdução acima e a leitura bíblica indicada para o momento de oração.
+            </div>
+            <span class="inline-feedback" id="copy-feedback" role="status" aria-live="polite"></span>
+          </section>
+
+          <section class="figure-card" aria-labelledby="card-note-label">
+            <div class="card-header-row">
+              <span class="card-kicker" id="card-note-label">
+                <i data-lucide="pen-line" aria-hidden="true"></i>
+                Compromisso Pessoal ou Familiar
+              </span>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="reflection-input" id="reflection-label">
+                Registo concreto para esta semana
+              </label>
+              <textarea
+                id="reflection-input"
+                class="textarea-input"
+                placeholder="Escreva aqui um propósito, intenção ou nome de alguém por quem rezar e apoiar…"
+                oninput="saveReflectionNote(this.value)"
+              ></textarea>
+            </div>
+            <span class="inline-feedback" id="note-save-feedback" role="status" aria-live="polite"></span>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visão Global da Campanha (Tabela Comparativa) -->
+    <section aria-labelledby="overview-section-heading">
+      <div class="section-head">
+        <div class="section-head-titles">
+          <span class="label-kicker">Mapa Completo · 2026/2027</span>
+          <h2 id="overview-section-heading">Quadro Geral da Campanha</h2>
+        </div>
+
+        <div class="controls-row-aligned">
+          <div class="field-group search-box-wrap">
+            <label class="field-label" for="table-search-input">Pesquisar celebração, texto bíblico ou atitude</label>
+            <input
+              type="search"
+              id="table-search-input"
+              class="text-input"
+              placeholder="Ex.: Isaías, Lucas, Alegria, Estrela…"
+              oninput="filterOverviewTable(this.value)"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="table-scroll" style="margin-top: var(--space-md);">
+        <table class="campaign-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Domingo / Celebração</th>
+              <th scope="col">Guia da Palavra</th>
+              <th scope="col">Texto Bíblico</th>
+              <th scope="col">Atitude a Melhorar</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody id="overview-table-body">
+            <!-- Preenchido dinamicamente -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <div>
+        <strong>Unidade Pastoral Santa Maria do Concelho de Penacova</strong> · Fonte: Documento da Campanha «Abre o coração à Palavra» — Do Advento ao Baptismo do Senhor (2026/2027).
+      </div>
+      <div class="footer-actions">
+        <button type="button" class="btn btn-subtle" id="btn-export-txt" onclick="exportCampaignSummary()">
+          <i data-lucide="download" aria-hidden="true"></i>
+          <span>Exportar guia e registos (.txt)</span>
+        </button>
+        <button type="button" class="btn btn-subtle" id="btn-reset-progress" onclick="resetProgressInline(this)">
+          <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+          <span>Limpar registos</span>
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <api-shim></api-shim>
+
+  <script>
+    const CAMPAIGN_DATA = [
+      {
+        id: `advento-1`,
+        order: 1,
+        shortLabel: `I Advento`,
+        guideShort: `Profeta Isaías`,
+        title: `I Domingo do Advento`,
+        season: `Advento`,
+        seasonLabel: `Tempo do Advento`,
+        seasonSubtitle: ``,
+        subtitle: `Abre o coração à Palavra com o profeta Isaías`,
+        scripture: `Isaías 63, 16b-17.19b; 64, 2b-7`,
+        attitudeTitle: `Esperança ativa`,
+        attitudeDesc: `Enfrentar as dificuldades da vida com serenidade e coragem, confiando que Deus nunca nos abandona.`,
+        gesture: `Aproximar-nos de alguém que esteja a passar por uma dificuldade, oferecendo-lhe uma palavra de esperança e ânimo.`,
+        introLabel: `Introdução à celebração`,
+        intro: `Como Isaías, abramos o coração à Palavra de Deus e aprendamos a confiar n'Aquele que nunca nos abandona.`,
+        signTitle: ``,
+        signDesc: ``,
+        prayer: `Deus nosso Pai e nosso Redentor abre o nosso coração à Tua Palavra, ilumina os nossos passos, renova a nossa confiança e ajuda-nos a olhar o futuro com esperança. Ámen`
+      },
+      {
+        id: `advento-2`,
+        order: 2,
+        shortLabel: `II Advento`,
+        guideShort: `João Batista`,
+        title: `II Domingo do Advento`,
+        season: `Advento`,
+        seasonLabel: `Tempo do Advento`,
+        seasonSubtitle: ``,
+        subtitle: `Abre o coração à Palavra com João Batista`,
+        scripture: `Marcos 1, 1-8`,
+        attitudeTitle: `Conversão`,
+        attitudeDesc: `Reconhecer os comportamentos que precisamos de mudar, melhorando a nossa relação com Deus e com os outros.`,
+        gesture: `Identificar um comportamento que prejudica a convivência familiar e fazer um esforço concreto para o corrigir.`,
+        introLabel: `Introdução à celebração`,
+        intro: `Escutemos a Palavra de Deus e deixemos que ela renove o nosso coração.`,
+        signTitle: ``,
+        signDesc: ``,
+        prayer: `Senhor Jesus Cristo abre o nosso coração à Tua Palavra, olha para as nossas orações, ilumina-nos com a Tua Luz, e faz com que aprendamos de João Batista a ser humildes e a reconhecer que só Tu és o Senhor da nossa vida. Ámen.`
+      },
+      {
+        id: `advento-3`,
+        order: 3,
+        shortLabel: `III Advento`,
+        guideShort: `Apóstolo Paulo`,
+        title: `III Domingo do Advento`,
+        season: `Advento`,
+        seasonLabel: `Tempo do Advento`,
+        seasonSubtitle: ``,
+        subtitle: `Abre o coração à Palavra com o Apóstolo Paulo`,
+        scripture: `1.ª Tessalonicenses 5, 16-24`,
+        attitudeTitle: `Alegria`,
+        attitudeDesc: `Cultivar a alegria mesmo nos momentos difíceis, confiando na presença de Deus e na força do Espírito Santo.`,
+        gesture: `Oferecer diariamente uma palavra de carinho, um elogio ou um agradecimento a alguém, levando alegria a quem nos rodeia.`,
+        introLabel: `Introdução à celebração`,
+        intro: `Como nos recorda São Paulo, somos chamados a viver com esperança, oração e gratidão, mesmo nas dificuldades.`,
+        signTitle: ``,
+        signDesc: ``,
+        prayer: `Senhor Jesus Cristo abre o nosso coração à Tua Luz, envia o Teu Espírito para renovar a terra e a encher de alegria e paz. Ámen`
+      },
+      {
+        id: `advento-4`,
+        order: 4,
+        shortLabel: `IV Advento`,
+        guideShort: `José e Maria`,
+        title: `IV Domingo do Advento`,
+        season: `Advento`,
+        seasonLabel: `Tempo do Advento`,
+        seasonSubtitle: ``,
+        subtitle: `Abre o coração à Palavra com José e Maria de Nazaré`,
+        scripture: `Lucas 1, 26-38`,
+        attitudeTitle: `Fé`,
+        attitudeDesc: `Acolher com humildade e confiança a vontade de Deus, seguindo o exemplo de Maria e José e dizendo SIM ao que Ele nos pede.`,
+        gesture: `Dizer SIM a um gesto concreto de ajuda ou serviço, colocando-nos verdadeiramente ao dispor de alguém.`,
+        introLabel: `Introdução à celebração`,
+        intro: `À semelhança de Maria e José, preparemos o nosso coração para receber Jesus.`,
+        signTitle: ``,
+        signDesc: ``,
+        prayer: `Senhor Jesus, Tu que és a Palavra eterna do Pai, escolheste Maria para fazeres a Tua morada entre os homens. Que o teu Espírito Santo realize também em nós a maravilha da Fé, para que, à imitação de Nossa Senhora, sejamos templos vivos da Tua presença e construtores da Tua Igreja. Ámen.`
+      },
+      {
+        id: `natal`,
+        order: 5,
+        shortLabel: `Dia de Natal`,
+        guideShort: `Jesus, Palavra Viva`,
+        title: `Dia de Natal`,
+        season: `Natal`,
+        seasonLabel: `Tempo do Natal`,
+        seasonSubtitle: `A Palavra fez-Se carne e habitou entre nós`,
+        subtitle: `Abre o coração à Palavra que é Jesus, verdadeiro Deus e verdadeiro Homem`,
+        scripture: `Lucas 2, 15-20`,
+        attitudeTitle: `Confiança e união`,
+        attitudeDesc: `Acolher Jesus como a Palavra viva de Deus, fortalecendo a união familiar e a atenção aos outros.`,
+        gesture: `Reunir a família num momento de oração e partilha, lembrando e procurando ajudar alguém que esteja sozinho ou a passar por dificuldades.`,
+        introLabel: `Introdução à celebração`,
+        intro: `A Palavra de Deus fez-se Homem e veio habitar entre nós.`,
+        signTitle: ``,
+        signDesc: ``,
+        prayer: `Senhor Jesus, na Noite Santa em que celebramos o Teu Nascimento, a nossa família reúne-se à volta desta mesa com o coração cheio de gratidão. Tu és o maior presente que a humanidade recebeu e a verdadeira razão da nossa alegria.
+        Todos: Vem Senhor Jesus e nasce na nossa família! - Abençoa esta refeição que vamos partilhar e as mãos de quem a preparou. Renova a nossa paciência uns com os outros e faz com que a nossa casa seja sempre uma morada onde Tu gostas de habitar, tal como habitaste no seio de Maria. Todos: Vem Senhor Jesus e nasce na nossa família! 
+        - Nesta noite de luz, lembramos com saudade os familiares que já partiram e que celebram o Natal na Tua glória. Olhamos também para fora da nossa casa e pedimos-Te por todos os que passam o Natal sozinhos, com fome, na guerra ou sem o calor de uma família. Que a Tua esperança chegue a cada um deles e que o nosso coração se abra à partilha.
+        Todos: Pai Nosso`
+      },
+      {
+        id: `sagrada-familia`,
+        order: 6,
+        shortLabel: `Sagrada Família`,
+        guideShort: `Família de Nazaré`,
+        title: `Domingo da Sagrada Família`,
+        season: `Natal`,
+        seasonLabel: `Tempo do Natal`,
+        seasonSubtitle: `A Palavra fez-Se carne e habitou entre nós`,
+        subtitle: `Abre o coração à Palavra com a Sagrada Família de Nazaré`,
+        scripture: `Lucas 2, 41-52`,
+        attitudeTitle: `Amor e cuidado`,
+        attitudeDesc: `Cultivar o respeito, a compreensão, a paciência e o diálogo entre todos os membros da família, seguindo o exemplo de Jesus, Maria e José.`,
+        gesture: `Dedicar um momento especial à família, fazendo algo em conjunto e dando atenção a quem mais precisa de carinho e companhia.`,
+        introLabel: `Introdução para a celebração`,
+        intro: `Como Maria e José, façamos das nossas famílias lugares de amor, compreensão e fé.`,
+        signTitle: `Sinal e oração – A bênção da família`,
+        signDesc: `Na igreja e em família, colocar uma imagem da Sagrada Família junto ao presépio ou no cantinho de oração.`,
+        prayer: `Senhor Jesus, que quiseste nascer e crescer numa família, abençoa as nossas famílias. Ensina-nos a viver no amor, no respeito, na compreensão e no perdão. Que, a exemplo de Maria e José, saibamos cuidar uns dos outros e fazer das nossas casas lugares de paz e união. Ámen.`
+      },
+      {
+        id: `epifania`,
+        order: 7,
+        shortLabel: `Epifania`,
+        guideShort: `Reis Magos`,
+        title: `Epifania do Senhor`,
+        season: `Natal`,
+        seasonLabel: `Tempo do Natal`,
+        seasonSubtitle: `A Palavra fez-Se carne e habitou entre nós`,
+        subtitle: `Abre o coração à Palavra com os Reis Magos`,
+        scripture: `Mateus 2, 1-12`,
+        attitudeTitle: `Adoração e partilha`,
+        attitudeDesc: `Procurar Jesus na nossa vida, reconhecendo-O como nosso Salvador, e aprender com os Magos a oferecer-Lhe o melhor de nós, partilhando os nossos dons com os outros.`,
+        gesture: `Partilhar algo de que gostamos ou de que precisamos com alguém que esteja a passar por dificuldades.`,
+        introLabel: `Introdução para a celebração`,
+        intro: `Guiados pela estrela, os Magos foram ao encontro de Jesus e reconheceram n’Ele o Salvador. Também nós somos convidados a procurar a sua luz e a levar essa luz a todos os que encontramos.`,
+        signTitle: `Sinal e oração – A estrela que nos guia até Jesus`,
+        signDesc: `Na igreja e em família, coloca-se uma estrela junto ao presépio, recordando a estrela que guiou os Magos até Jesus.`,
+        prayer: `Senhor Jesus, Tu és a verdadeira luz que ilumina o mundo. Tal como guiaste os Magos através da estrela, guia também os nossos passos até Ti. Abre o nosso coração para Te reconhecermos e ensina-nos a oferecer o melhor de nós, partilhando com alegria os nossos dons e o nosso amor. Ámen.`
+      },
+      {
+        id: `baptismo`,
+        order: 8,
+        shortLabel: `Baptismo`,
+        guideShort: `Filho Amado`,
+        title: `Baptismo do Senhor`,
+        season: `Natal`,
+        seasonLabel: `Tempo do Natal`,
+        seasonSubtitle: `A Palavra fez-Se carne e habitou entre nós`,
+        subtitle: `Abre o coração à Palavra com Jesus, o Filho amado do Pai`,
+        scripture: `Marcos 1, 7-11`,
+        attitudeTitle: `Compromisso e testemunho`,
+        attitudeDesc: `Reconhecer a nossa condição de filhos de Deus e assumir, com alegria e responsabilidade, o compromisso de viver e testemunhar a fé no nosso dia a dia.`,
+        gesture: `Fazer uma oração de agradecimento pelo nosso Baptismo e assumir um compromisso concreto de viver a fé através de uma atitude de amor e serviço.`,
+        introLabel: `Introdução para a celebração`,
+        intro: `Recordemos o nosso próprio Baptismo e renovemos o compromisso de viver como filhos de Deus.`,
+        signTitle: `Sinal e oração – A água que nos recorda o Baptismo`,
+        signDesc: `Na igreja, pode realizar-se uma aspersão da assembleia com água benta, recordando o Baptismo e a vida nova que recebemos em Cristo. Em família, cada pessoa pode fazer sobre si o sinal da cruz com água benta, se disponível, recordando o seu Baptismo e agradecendo o dom da fé.`,
+        prayer: `Senhor Jesus, no dia do nosso Baptismo tornámo-nos filhos de Deus e membros da Tua Igreja. Obrigado pelo dom da fé e pela vida nova que recebemos. Renova em nós a força do Espírito Santo e ajuda-nos a viver como verdadeiros filhos de Deus, levando o Teu amor e a Tua Palavra a todos os que encontramos. Ámen.`
+      }
+    ];
+
+    let appState = {
+      selectedId: `advento-1`,
+      seasonFilter: `all`,
+      completedGestures: {},
+      notes: {}
+    };
+
+    let searchQuery = ``;
+    let saveTimer = null;
+
+    function getSelectedIndex() {
+      const idx = CAMPAIGN_DATA.findIndex(function(item) {
+        return item.id === appState.selectedId;
+      });
+      return idx >= 0 ? idx : 0;
+    }
+
+    function getVisibleCelebrations() {
+      if (appState.seasonFilter === `all`) {
+        return CAMPAIGN_DATA;
+      }
+      return CAMPAIGN_DATA.filter(function(item) {
+        return item.season === appState.seasonFilter;
+      });
+    }
+
+    async function persistState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+        try {
+          await window.notebookAppApi.setAppState({
+            selectedId: appState.selectedId,
+            seasonFilter: appState.seasonFilter,
+            completedGestures: appState.completedGestures,
+            notes: appState.notes
+          });
+        } catch (err) {
+          // Ignore transient host persistence errors silently
+        }
+      }
+    }
+
+    function selectCelebration(id, shouldScrollToDetail) {
+      const exists = CAMPAIGN_DATA.some(function(item) { return item.id === id; });
+      if (!exists) return;
+      appState.selectedId = id;
+      renderAll(true);
+      persistState();
+      if (shouldScrollToDetail) {
+        const detailEl = document.getElementById(`detail-section`);
+        if (detailEl) {
+          detailEl.scrollIntoView({ behavior: `smooth`, block: `start` });
+        }
+      }
+    }
+
+    function stepCelebration(delta) {
+      const visible = getVisibleCelebrations();
+      if (!visible.length) return;
+      let currentPos = visible.findIndex(function(item) {
+        return item.id === appState.selectedId;
+      });
+      if (currentPos === -1) {
+        currentPos = 0;
+      } else {
+        currentPos = Math.max(0, Math.min(visible.length - 1, currentPos + delta));
+      }
+      appState.selectedId = visible[currentPos].id;
+      renderAll(true);
+      persistState();
+    }
+
+    function setSeasonFilter(season) {
+      appState.seasonFilter = season;
+      const visible = getVisibleCelebrations();
+      const stillVisible = visible.some(function(item) {
+        return item.id === appState.selectedId;
+      });
+      if (!stillVisible && visible.length > 0) {
+        appState.selectedId = visible[0].id;
+      }
+      renderAll(true);
+      persistState();
+    }
+
+    function toggleGestureDone() {
+      const id = appState.selectedId;
+      appState.completedGestures[id] = !appState.completedGestures[id];
+      renderAll(false);
+      persistState();
+    }
+
+    function saveReflectionNote(value) {
+      const id = appState.selectedId;
+      appState.notes[id] = value;
+      const feedbackEl = document.getElementById(`note-save-feedback`);
+      if (feedbackEl) {
+        feedbackEl.textContent = `A guardar registo…`;
+      }
+      if (saveTimer) clearTimeout(saveTimer);
+      saveTimer = setTimeout(function() {
+        persistState();
+        if (feedbackEl) {
+          feedbackEl.textContent = value.trim() ? `Registo guardado.` : `Registo limpo.`;
+        }
+      }, 260);
+    }
+
+    function filterOverviewTable(query) {
+      searchQuery = String(query || ``).trim().toLowerCase();
+      renderOverviewTable();
+    }
+
+    function copyTextField(fieldType) {
+      const item = CAMPAIGN_DATA[getSelectedIndex()];
+      if (!item) return;
+      let textToCopy = ``;
+      let successMsg = ``;
+      if (fieldType === `scripture`) {
+        textToCopy = `${item.title} — Texto a meditar: ${item.scripture}`;
+        successMsg = `Referência bíblica copiada.`;
+      } else {
+        if (item.prayer) {
+          textToCopy = `${item.title}\n${item.signTitle ? item.signTitle + '\n' : ''}${item.prayer}`;
+          successMsg = `Oração copiada para a área de transferência.`;
+        } else {
+          textToCopy = `${item.title} — ${item.introLabel}: ${item.intro}`;
+          successMsg = `Introdução à celebração copiada.`;
+        }
+      }
+      const feedback = document.getElementById(`copy-feedback`);
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === `function`) {
+        navigator.clipboard.writeText(textToCopy).then(function() {
+          if (feedback) feedback.textContent = successMsg;
+        }).catch(function() {
+          if (feedback) feedback.textContent = `Selecione o texto para copiar manualmente.`;
+        });
+      } else {
+        if (feedback) feedback.textContent = `Selecione o texto para copiar manualmente.`;
+      }
+    }
+
+    function exportCampaignSummary() {
+      const lines = [
+        `CAMPANHA «ABRE O CORAÇÃO À PALAVRA» — ADVENTO E NATAL 2026/2027`,
+        `Unidade Pastoral Santa Maria do Concelho de Penacova`,
+        `================================================================`,
+        ``
+      ];
+      CAMPAIGN_DATA.forEach(function(item) {
+        const doneLabel = appState.completedGestures[item.id] ? `[VIVIDO]` : `[POR VIVER]`;
+        lines.push(`${item.order}. ${item.title.toUpperCase()} (${item.seasonLabel}) ${doneLabel}`);
+        lines.push(`   Tema: ${item.subtitle}`);
+        lines.push(`   Texto a meditar: ${item.scripture}`);
+        lines.push(`   Atitude a melhorar — ${item.attitudeTitle}: ${item.attitudeDesc}`);
+        lines.push(`   Gesto da semana: ${item.gesture}`);
+        lines.push(`   ${item.introLabel}: ${item.intro}`);
+        if (item.signTitle) {
+          lines.push(`   ${item.signTitle}: ${item.signDesc}`);
+        }
+        if (item.prayer) {
+          lines.push(`   Oração: ${item.prayer}`);
+        }
+        const userNote = appState.notes[item.id];
+        if (userNote && userNote.trim()) {
+          lines.push(`   Registo pessoal/familiar: ${userNote.trim()}`);
+        }
+        lines.push(``);
+      });
+
+      const content = lines.join(`\n`);
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: content,
+          contentType: `text/plain`,
+          encoding: `UTF-8`,
+          filename: `campanha-abre-o-coracao-2026-penacova.txt`
+        });
+      } else {
+        const blob = new Blob([content], { type: `text/plain;charset=utf-8` });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement(`a`);
+        link.href = url;
+        link.download = `campanha-abre-o-coracao-2026-penacova.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    function resetProgressInline(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        const span = btn.querySelector(`span`);
+        if (span) span.textContent = `Confirmar limpeza`;
+        setTimeout(function() {
+          if (btn.dataset.armed === `true`) {
+            btn.dataset.armed = `false`;
+            const s = btn.querySelector(`span`);
+            if (s) s.textContent = `Limpar registos`;
+          }
+        }, 4000);
+        return;
+      }
+      btn.dataset.armed = `false`;
+      const span = btn.querySelector(`span`);
+      if (span) span.textContent = `Limpar registos`;
+      appState.completedGestures = {};
+      appState.notes = {};
+      renderAll(false);
+      persistState();
+    }
+
+    function renderNavigationTabs() {
+      const tabsContainer = document.getElementById(`celebration-tabs`);
+      if (!tabsContainer) return;
+      tabsContainer.innerHTML = ``;
+
+      CAMPAIGN_DATA.forEach(function(item) {
+        const isSelected = item.id === appState.selectedId;
+        const isDone = Boolean(appState.completedGestures[item.id]);
+        const isHidden = appState.seasonFilter !== `all` && item.season !== appState.seasonFilter;
+
+        const btn = document.createElement(`button`);
+        btn.type = `button`;
+        btn.className = `celebration-tab` + (isHidden ? ` is-hidden` : ``);
+        btn.setAttribute(`role`, `tab`);
+        btn.setAttribute(`aria-selected`, isSelected ? `true` : `false`);
+        btn.setAttribute(`data-id`, item.id);
+        btn.onclick = function() {
+          selectCelebration(item.id, false);
+        };
+
+        const metaRow = document.createElement(`div`);
+        metaRow.className = `tab-meta-row`;
+
+        const numSpan = document.createElement(`span`);
+        numSpan.className = `tab-num`;
+        numSpan.textContent = `0${item.order}`;
+        metaRow.appendChild(numSpan);
+
+        if (isDone) {
+          const doneSpan = document.createElement(`span`);
+          doneSpan.className = `tab-done-mark`;
+          doneSpan.setAttribute(`title`, `Gesto vivido`);
+          doneSpan.innerHTML = `<i data-lucide="check" aria-hidden="true"></i>`;
+          metaRow.appendChild(doneSpan);
+        }
+
+        const titleSpan = document.createElement(`span`);
+        titleSpan.className = `tab-title`;
+        titleSpan.textContent = item.shortLabel;
+
+        const guideSpan = document.createElement(`span`);
+        guideSpan.className = `tab-guide`;
+        guideSpan.textContent = item.guideShort;
+
+        btn.appendChild(metaRow);
+        btn.appendChild(titleSpan);
+        btn.appendChild(guideSpan);
+        tabsContainer.appendChild(btn);
+      });
+
+      const filterBtns = {
+        all: document.getElementById(`filter-all`),
+        Advento: document.getElementById(`filter-advento`),
+        Natal: document.getElementById(`filter-natal`)
+      };
+      Object.keys(filterBtns).forEach(function(key) {
+        const el = filterBtns[key];
+        if (!el) return;
+        if (appState.seasonFilter === key) {
+          el.classList.add(`is-active`);
+        } else {
+          el.classList.remove(`is-active`);
+        }
+      });
+
+      const visible = getVisibleCelebrations();
+      const visibleIdx = visible.findIndex(function(c) { return c.id === appState.selectedId; });
+      const prevBtn = document.getElementById(`btn-prev-celebration`);
+      const nextBtn = document.getElementById(`btn-next-celebration`);
+      if (prevBtn) prevBtn.disabled = visibleIdx <= 0;
+      if (nextBtn) nextBtn.disabled = visibleIdx < 0 || visibleIdx >= visible.length - 1;
+
+      const indicator = document.getElementById(`active-position-indicator`);
+      const activeItem = CAMPAIGN_DATA[getSelectedIndex()];
+      if (indicator && activeItem) {
+        indicator.textContent = `Celebração ${activeItem.order} de ${CAMPAIGN_DATA.length} · ${activeItem.seasonLabel}`;
+      }
+    }
+
+    function renderDetailView(animateHero) {
+      const item = CAMPAIGN_DATA[getSelectedIndex()];
+      if (!item) return;
+
+      const heroEl = document.getElementById(`celebration-hero`);
+      if (heroEl && animateHero) {
+        heroEl.classList.remove(`fade-swap`);
+        void heroEl.offsetWidth;
+        heroEl.classList.add(`fade-swap`);
+      }
+
+      const isDone = Boolean(appState.completedGestures[item.id]);
+
+      const seasonTag = document.getElementById(`detail-season-tag`);
+      if (seasonTag) seasonTag.textContent = item.seasonLabel;
+
+      const doneTag = document.getElementById(`detail-done-tag`);
+      if (doneTag) doneTag.hidden = !isDone;
+
+      const orderLabel = document.getElementById(`detail-order-label`);
+      if (orderLabel) orderLabel.textContent = `Celebração 0${item.order} / 0${CAMPAIGN_DATA.length}`;
+
+      const titleEl = document.getElementById(`detail-celebration-title`);
+      if (titleEl) titleEl.textContent = item.title;
+
+      const subEl = document.getElementById(`detail-celebration-subtitle`);
+      if (subEl) subEl.textContent = item.subtitle;
+
+      const introLabel = document.getElementById(`detail-intro-label`);
+      if (introLabel) introLabel.textContent = item.introLabel;
+
+      const introText = document.getElementById(`detail-intro-text`);
+      if (introText) introText.textContent = item.intro;
+
+      const scriptureEl = document.getElementById(`detail-scripture`);
+      if (scriptureEl) scriptureEl.textContent = item.scripture;
+
+      const seasonSubEl = document.getElementById(`detail-season-subline`);
+      if (seasonSubEl) {
+        seasonSubEl.textContent = item.seasonSubtitle ? item.seasonSubtitle : `Tempo do Advento — Preparação do coração`;
+      }
+
+      const attTitleEl = document.getElementById(`detail-attitude-title`);
+      if (attTitleEl) attTitleEl.textContent = item.attitudeTitle;
+
+      const attDescEl = document.getElementById(`detail-attitude-desc`);
+      if (attDescEl) attDescEl.textContent = item.attitudeDesc;
+
+      const gestureEl = document.getElementById(`detail-gesture-text`);
+      if (gestureEl) gestureEl.textContent = item.gesture;
+
+      const toggleBtn = document.getElementById(`btn-toggle-gesture`);
+      const toggleText = document.getElementById(`btn-toggle-gesture-text`);
+      const statusNote = document.getElementById(`gesture-status-note`);
+      if (toggleBtn && toggleText && statusNote) {
+        if (isDone) {
+          toggleBtn.className = `btn btn-positive-active`;
+          toggleText.textContent = `Gesto vivido esta semana`;
+          statusNote.textContent = `Assinalado como concluído`;
+          statusNote.className = `status-note is-positive`;
+        } else {
+          toggleBtn.className = `btn btn-primary`;
+          toggleText.textContent = `Marcar gesto como vivido`;
+          statusNote.textContent = `Por viver esta semana`;
+          statusNote.className = `status-note`;
+        }
+      }
+
+      const signContainer = document.getElementById(`detail-sign-container`);
+      const signTitle = document.getElementById(`detail-sign-title`);
+      const signDesc = document.getElementById(`detail-sign-desc`);
+      if (signContainer && signTitle && signDesc) {
+        if (item.signTitle && item.signDesc) {
+          signContainer.hidden = false;
+          signTitle.textContent = item.signTitle;
+          signDesc.textContent = item.signDesc;
+        } else {
+          signContainer.hidden = true;
+        }
+      }
+
+      const prayerContainer = document.getElementById(`detail-prayer-container`);
+      const prayerText = document.getElementById(`detail-prayer-text`);
+      const prayerEmpty = document.getElementById(`detail-prayer-empty`);
+      const copyPrayerBtn = document.getElementById(`btn-copy-prayer`);
+      if (prayerContainer && prayerText && prayerEmpty && copyPrayerBtn) {
+        if (item.prayer) {
+          prayerContainer.hidden = false;
+          prayerEmpty.hidden = true;
+          prayerText.textContent = item.prayer;
+          const span = copyPrayerBtn.querySelector(`span`);
+          if (span) span.textContent = `Copiar oração`;
+        } else {
+          prayerContainer.hidden = true;
+          prayerEmpty.hidden = false;
+          const span = copyPrayerBtn.querySelector(`span`);
+          if (span) span.textContent = `Copiar introdução`;
+        }
+      }
+
+      const copyFeedback = document.getElementById(`copy-feedback`);
+      if (copyFeedback) copyFeedback.textContent = ``;
+
+      const reflectionInput = document.getElementById(`reflection-input`);
+      const reflectionLabel = document.getElementById(`reflection-label`);
+      const noteFeedback = document.getElementById(`note-save-feedback`);
+      if (reflectionInput) {
+        reflectionInput.value = appState.notes[item.id] || ``;
+      }
+      if (reflectionLabel) {
+        reflectionLabel.textContent = `Registo concreto para ${item.shortLabel}`;
+      }
+      if (noteFeedback) {
+        noteFeedback.textContent = ``;
+      }
+    }
+
+    function renderHeaderStats() {
+      const doneCount = CAMPAIGN_DATA.filter(function(item) {
+        return Boolean(appState.completedGestures[item.id]);
+      }).length;
+      const countEl = document.getElementById(`header-progress-count`);
+      const noteEl = document.getElementById(`header-progress-note`);
+      if (countEl) countEl.textContent = `${doneCount} / ${CAMPAIGN_DATA.length}`;
+      if (noteEl) {
+        if (doneCount === 0) {
+          noteEl.textContent = `Gestos semanais vividos`;
+        } else if (doneCount === CAMPAIGN_DATA.length) {
+          noteEl.textContent = `Todos os gestos da campanha concluídos`;
+        } else {
+          noteEl.textContent = `${doneCount} ${doneCount === 1 ? 'gesto assinalado' : 'gestos assinalados'}`;
+        }
+      }
+    }
+
+    function renderOverviewTable() {
+      const tbody = document.getElementById(`overview-table-body`);
+      if (!tbody) return;
+      tbody.innerHTML = ``;
+
+      const matches = CAMPAIGN_DATA.filter(function(item) {
+        if (!searchQuery) return true;
+        const haystack = [
+          item.title,
+          item.subtitle,
+          item.guideShort,
+          item.scripture,
+          item.attitudeTitle,
+          item.attitudeDesc,
+          item.gesture,
+          item.seasonLabel
+        ].join(` `).toLowerCase();
+        return haystack.indexOf(searchQuery) !== -1;
+      });
+
+      if (matches.length === 0) {
+        const emptyRow = document.createElement(`tr`);
+        const emptyCell = document.createElement(`td`);
+        emptyCell.colSpan = 6;
+        emptyCell.textContent = `Nenhuma celebração corresponde à pesquisa "${searchQuery}".`;
+        emptyRow.appendChild(emptyCell);
+        tbody.appendChild(emptyRow);
+        return;
+      }
+
+      matches.forEach(function(item) {
+        const tr = document.createElement(`tr`);
+        if (item.id === appState.selectedId) {
+          tr.className = `is-selected`;
+        }
+        tr.onclick = function() {
+          selectCelebration(item.id, true);
+        };
+
+        const tdNum = document.createElement(`td`);
+        tdNum.className = `col-num`;
+        tdNum.textContent = `0${item.order}`;
+
+        const tdTitle = document.createElement(`td`);
+        tdTitle.className = `table-title-cell`;
+        tdTitle.textContent = item.title;
+
+        const tdGuide = document.createElement(`td`);
+        tdGuide.textContent = item.guideShort;
+
+        const tdScripture = document.createElement(`td`);
+        tdScripture.className = `table-scripture-cell`;
+        tdScripture.textContent = item.scripture;
+
+        const tdAttitude = document.createElement(`td`);
+        tdAttitude.textContent = item.attitudeTitle;
+
+        const tdStatus = document.createElement(`td`);
+        const isDone = Boolean(appState.completedGestures[item.id]);
+        const badge = document.createElement(`span`);
+        badge.className = isDone ? `stamp-tag stamp-tag-green` : `stamp-tag`;
+        badge.textContent = isDone ? `Vivido` : `Por viver`;
+        tdStatus.appendChild(badge);
+
+        tr.appendChild(tdNum);
+        tr.appendChild(tdTitle);
+        tr.appendChild(tdGuide);
+        tr.appendChild(tdScripture);
+        tr.appendChild(tdAttitude);
+        tr.appendChild(tdStatus);
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderAll(animateHero) {
+      renderHeaderStats();
+      renderNavigationTabs();
+      renderDetailView(animateHero);
+      renderOverviewTable();
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    }
+
+    document.addEventListener(`keydown`, function(e) {
+      const activeTag = document.activeElement ? document.activeElement.tagName : ``;
+      if (activeTag === `INPUT` || activeTag === `TEXTAREA`) return;
+      if (e.key === `ArrowLeft`) {
+        stepCelebration(-1);
+      } else if (e.key === `ArrowRight`) {
+        stepCelebration(1);
+      }
+    });
+
+    async function initApp() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === `object`) {
+            if (saved.selectedId && CAMPAIGN_DATA.some(function(c) { return c.id === saved.selectedId; })) {
+              appState.selectedId = saved.selectedId;
+            }
+            if (saved.seasonFilter) {
+              appState.seasonFilter = saved.seasonFilter;
+            }
+            if (saved.completedGestures && typeof saved.completedGestures === `object`) {
+              appState.completedGestures = saved.completedGestures;
+            }
+            if (saved.notes && typeof saved.notes === `object`) {
+              appState.notes = saved.notes;
+            }
+          }
+        } catch (err) {
+          // Proceed with default state
+        }
+      }
+
+      renderAll(false);
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
