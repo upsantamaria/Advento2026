@@ -1363,10 +1363,20 @@
       }
     }
 
+    // Mantém a celebração selecionada sincronizada com o parâmetro ?semana=N.
+    function syncWeekToUrl() {
+      const selected = CAMPAIGN_DATA.find(function(item) { return item.id === appState.selectedId; });
+      if (!selected) return;
+      const url = new URL(window.location.href);
+      url.searchParams.set(`semana`, String(selected.order));
+      window.history.replaceState({}, ``, url.pathname + url.search + url.hash);
+    }
+
     function selectCelebration(id, shouldScrollToDetail) {
       const exists = CAMPAIGN_DATA.some(function(item) { return item.id === id; });
       if (!exists) return;
       appState.selectedId = id;
+      syncWeekToUrl();
       renderAll(true);
       persistState();
       if (shouldScrollToDetail) {
@@ -1389,6 +1399,7 @@
         currentPos = Math.max(0, Math.min(visible.length - 1, currentPos + delta));
       }
       appState.selectedId = visible[currentPos].id;
+      syncWeekToUrl();
       renderAll(true);
       persistState();
     }
@@ -1402,6 +1413,7 @@
       if (!stillVisible && visible.length > 0) {
         appState.selectedId = visible[0].id;
       }
+      syncWeekToUrl();
       renderAll(true);
       persistState();
     }
@@ -1867,6 +1879,12 @@
         }
       }
 
+      // O parâmetro do URL tem prioridade sobre a última celebração guardada.
+      const requestedWeek = Number(new URLSearchParams(window.location.search).get(`semana`));
+      if (Number.isInteger(requestedWeek) && requestedWeek >= 1 && requestedWeek <= CAMPAIGN_DATA.length) {
+        appState.selectedId = CAMPAIGN_DATA[requestedWeek - 1].id;
+      }
+      syncWeekToUrl();
       renderAll(false);
 
       if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
